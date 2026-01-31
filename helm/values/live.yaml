@@ -2,7 +2,7 @@ name: winterflowspace-api
 
 namespace: kavanest
 env:
-  APP_VERSION: d15da55fe6aed4685ce89dff6bdf3fa7d03339cf
+  APP_VERSION: aa3fe1e5e99e84ca38d52896d52e41d9f52a4852
 
 deployment:
   - name: winterflowspace-api
@@ -11,11 +11,11 @@ deployment:
       - port: 3000
 
 ingress:
-  - name: api.kavanet.io
+  - name: api.winterflowspace.com
     selector: winterflowspace-api
     path: /
     port: 3000
-    host: api.kavanet.io
+    host: api.winterflowspace.com
 
 service:
   loadBalancer:
