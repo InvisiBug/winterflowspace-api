@@ -86,7 +86,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Merge test-release -> test
+      - name: Merge live-release -> dev
         uses: devmasx/merge-branch@master
         with:
           type: now
