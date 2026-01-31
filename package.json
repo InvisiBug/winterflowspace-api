@@ -7,10 +7,12 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec tsx ./src/index.ts"
+    "dev": "nodemon --exec tsx ./src/index.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "@types/express": "^5.0.6",
+    "@types/node": "^25.1.0",
     "eslint": "^9.39.2",
     "express": "^5.2.1",
     "nodejs": "^0.0.0",
