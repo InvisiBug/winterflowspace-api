@@ -77,7 +77,7 @@ jobs:
           type: now
           message: New app version created '${{ github.sha }}'
           from_branch: live-release
-          target_branch: master
+          target_branch: main
           github_token: ${{ secrets.ACCESS_TOKEN }}
 
   sync-dev:
@@ -90,7 +90,7 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: master
+          from_branch: main
           message: fast-forward dev
           target_branch: dev
           github_token: ${{ secrets.ACCESS_TOKEN }}
