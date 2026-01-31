@@ -1,0 +1,25 @@
+name: winterflowspace-api
+
+namespace: kavanest
+env:
+  APP_VERSION: 0f1f57f195a7527c1ac6ecb3f5ab4b8076bd793b
+
+deployment:
+  - name: winterflowspace-api
+    image: invisibug/winterflowspace-api
+    ports:
+      - port: 3000
+
+ingress:
+  - name: api.kavanet.io
+    selector: winterflowspace-api
+    path: /
+    port: 3000
+    host: api.kavanet.io
+
+service:
+  loadBalancer:
+    - name: winterflowspace-api
+      selector: winterflowspace-api
+      port: 80
+      containerPort: 3000
