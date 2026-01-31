@@ -11,11 +11,11 @@ deployment:
       - port: 3000
 
 ingress:
-  - name: api.kavanet.io
+  - name: api.winterflowspace.com
     selector: winterflowspace-api
     path: /
     port: 3000
-    host: api.kavanet.io
+    host: api.winterflowspace.com
 
 service:
   loadBalancer:
