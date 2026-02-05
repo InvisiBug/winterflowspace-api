@@ -1,19 +1,17 @@
 import express, { json } from "express";
 import cors from "cors";
+import { getStudioBookings } from "./lib/utils";
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.use(json());
 app.use(cors());
 
 app.post("/get-schedule", async (req, res) => {
-  console.log("Something is fetching");
-
   try {
     const response = await fetch(`https://businessgateway.puregym.com/api/bookings/v1/timetable/${req.body.gymId}/scheduled-class`, { cache: "no-store" });
-
     const jsonResponse = await response.json();
 
     res.json({
@@ -24,12 +22,33 @@ app.post("/get-schedule", async (req, res) => {
     res.status(500).json({
       status: "error",
       message: "Error fetching schedule",
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+app.post("/get-bookings", async (req, res) => {
+  try {
+    const response = await fetch(`https://businessgateway.puregym.com/api/bookings/v1/timetable/${req.body.gymId}/scheduled-class`, { cache: "no-store" });
+    const jsonResponse = await response.json();
+
+    const bookings = await getStudioBookings(jsonResponse);
+    console.log("🚀 ~ bookings:", bookings);
+
+    res.json({
+      status: "success",
+      bookings,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Error fetching schedule",
+      error: error instanceof Error ? error.message : "Unknown error",
     });
   }
 });
 
 app.get("/get-gyms", async (_, res) => {
-  console.log("fetching gyms");
   try {
     const rawAvailableGymsResponse = await fetch("https://www.puregym.com/gymsandcities/page-data/sq/d/273207268.json", { cache: "no-store" });
     const formattedAvailableGymResponse = await rawAvailableGymsResponse.json();
@@ -87,7 +106,6 @@ app.post("/get-occupants", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  console.log("Logging in user");
   try {
     const { username, password } = req.body;
 
@@ -131,5 +149,5 @@ app.get("/health", (_, res) => {
 });
 
 app.listen(PORT, async () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT} 📡`);
 });
