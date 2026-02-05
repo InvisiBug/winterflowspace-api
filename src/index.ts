@@ -35,6 +35,7 @@ app.post("/get-bookings", async (req, res) => {
     const jsonResponse = await response.json();
 
     const bookings = await getStudioBookings(jsonResponse);
+    console.log("🚀 ~ bookings:", bookings);
 
     res.json({
       status: "success",
