@@ -1,15 +1,13 @@
 import express, { json } from "express";
 import cors from "cors";
-import { test, getStudioBookings } from "./test";
+import { getStudioBookings } from "./lib/utils";
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 app.use(json());
 app.use(cors());
-
-test();
 
 app.post("/get-schedule", async (req, res) => {
   try {

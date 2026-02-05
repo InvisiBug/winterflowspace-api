@@ -107,3 +107,9 @@ export interface ClassData {
   end: string;
   duration?: number;
 }
+
+export interface Booking {
+  free: boolean;
+  start: string; // HH:MM format
+  end: string; // HH:MM format
+}
