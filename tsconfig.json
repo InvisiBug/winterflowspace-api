@@ -8,18 +8,24 @@
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     // "module": "nodenext",
-    "target": "esnext",
-    "types": [],
-    "outDir": "dist",
+    // "target": "esnext",
+    // "types": [],
+    "outDir": "dist/",
+    // "module": "ESNext",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "noEmit": false,
+    "baseUrl": ".",
+
+
     // For nodejs:
     // "lib": ["esnext"],
     // "types": ["node"],
     // and npm install -D @types/node
 
-    // Other Outputs
-    "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
 
     // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
@@ -35,16 +41,24 @@
 
     // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
+
     "verbatimModuleSyntax": false,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
     "skipLibCheck": true,
     "paths": {
       "src*": ["./src/*"],
       "@/*": ["./src/*"]
     },
-  }
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths"
+      }
+    ],
+  },
+  "ts-node": {
+  // Do not forget to `yarn add tsconfig-paths`
+  "require": ["tsconfig-paths/register"]
+  },
+  "include": ["src",]
 }
