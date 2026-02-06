@@ -1,6 +1,4 @@
-import { Schedule } from "@/lib/types";
-
-export const data: Schedule = {
+export const data = {
   status: "success",
   schedule: {
     activities: [

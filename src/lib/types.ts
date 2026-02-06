@@ -1,4 +1,11 @@
-export interface GymData {
+export interface LoginAPI {
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+  scope: string;
+}
+
+export interface GetGymsAPI {
   data: Data;
 }
 export interface Data {
@@ -49,18 +56,15 @@ export interface Urls {
   joinJoin: string;
 }
 
-export type AvailableGyms = UserSelection[];
+export type GetGymsResponse = UserSelection[];
 
 export type UserSelection = {
   name: string;
   id: string;
 };
 
-export interface Schedule {
-  status: string;
-  schedule: {
-    activities: ActivitiesEntity[];
-  };
+export interface GetBookingsAPI {
+  activities: ActivitiesEntity[];
 }
 
 export interface ActivitiesEntity {
@@ -112,4 +116,12 @@ export interface Booking {
   free: boolean;
   start: string; // HH:MM format
   end: string; // HH:MM format
+}
+
+export interface GetOccupantsAPI {
+  TotalPeopleInGym: number | null;
+  TotalPeopleInClasses: number | null;
+  AttendanceTime: string | null;
+  LastRefreshed: string | null;
+  MaximumCapacity: number | null;
 }
