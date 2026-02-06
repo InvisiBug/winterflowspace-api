@@ -107,8 +107,16 @@ app.post("/login", async (req, res) => {
       headers,
       body: new URLSearchParams(data).toString(),
     });
+    console.log("🚀 ~ loginToken:", loginToken);
 
     const { access_token: token }: LoginAPI = await loginToken.json();
+
+    // if (token === undefined) {
+    //   res.status(500).json({
+    //     status: "error",
+    //     message: "Error logging in",
+    //   });
+    // }
 
     res.json({
       status: "success",
@@ -117,7 +125,7 @@ app.post("/login", async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: "error",
-      message: "Error fetching occupants",
+      message: "Error logging in",
     });
   }
 });
