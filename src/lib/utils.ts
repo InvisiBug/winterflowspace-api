@@ -1,15 +1,13 @@
-import { Booking } from "./types";
+import { GetBookingsAPI, Booking } from "./types";
 
-export const getStudioBookings = async (data: any): Promise<Booking[][]> => {
+export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[][]> => {
   const numDays = 2;
   const studioBookings: Booking[][] = [];
-  const activities = data.activities;
 
   Array.from({ length: numDays }).forEach((_, dayIndex: number) => {
     const dailyStudioBookings = new Array<Booking>();
 
-    // activities.forEach((activity: any) => {
-    for (const activity of activities) {
+    for (const activity of data.activities) {
       if (activity.studio.toUpperCase() === "STUDIO") {
         // Check if activity is today
         const activityDate = new Date(activity.startDateTime.dateTime).toDateString();
@@ -37,10 +35,9 @@ export const getStudioBookings = async (data: any): Promise<Booking[][]> => {
         }
       }
     }
-    // console.log("🚀 ~ getStudioFreeTime ~ studioBookings:", studioBookings);
+
     studioBookings.push(dailyStudioBookings);
   });
 
-  console.log("🚀 ~ getStudioBookings ~ studioBookings:", studioBookings[1]);
   return studioBookings;
 };
