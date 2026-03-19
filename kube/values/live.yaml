@@ -2,7 +2,7 @@ name: winterflowspace-api
 
 namespace: kavanest
 env:
-  APP_VERSION: 9bc7c95f241612a55aeddceb89315a1cf76252fb
+  APP_VERSION: f60bb71cded033620b67a29556a0eec606fc59f9
 
 deployment:
   - name: winterflowspace-api
