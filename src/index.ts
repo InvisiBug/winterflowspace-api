@@ -11,23 +11,24 @@ app.use(json());
 app.use(cors());
 
 app.post("/get-bookings", async (req, res) => {
-  try {
-    const response = await fetch(`https://businessgateway.puregym.com/api/bookings/v1/timetable/${req.body.gymId}/scheduled-class`, { cache: "no-store" });
-    const jsonResponse: GetBookingsAPI = await response.json();
+  console.log("🚀 ~ bookings:");
+  // try {
+  const response = await fetch(`https://businessgateway.puregym.com/api/bookings/v1/timetable/${req.body.gymId}/scheduled-class`, { cache: "no-store" });
+  const jsonResponse: GetBookingsAPI = await response.json();
 
-    const bookings = await getStudioBookings(jsonResponse);
+  const bookings = await getStudioBookings(jsonResponse);
 
-    res.json({
-      status: "success",
-      bookings,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: "Error fetching schedule",
-      error: error instanceof Error ? error.message : "Unknown error",
-    });
-  }
+  res.json({
+    status: "success",
+    bookings,
+  });
+  // } catch (error) {
+  //   res.status(500).json({
+  //     status: "error",
+  //     message: "Error fetching schedule",
+  //     error: error instanceof Error ? error.message : "Unknown error",
+  //   });
+  // }
 });
 
 app.get("/get-gyms", async (_, res) => {
@@ -57,30 +58,25 @@ app.get("/get-gyms", async (_, res) => {
 });
 
 app.post("/get-occupants", async (req, res) => {
-  try {
-    const { token, gymId } = req.body;
+  console.log("🚀 ~ /get-occupants ~ req.body:", req.body);
+  const { token, gymId } = req.body;
 
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "User-Agent": "PureGym/1523 CFNetwork/1312 Darwin/21.0.0",
-      Authorization: `Bearer ${token}`,
-    };
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "User-Agent": "PureGym/1523 CFNetwork/1312 Darwin/21.0.0",
+    Authorization: `Bearer ${token}`,
+  };
 
-    const response = await fetch(`https://capi.puregym.com/api/v2/gymSessions/gym?gymId=${gymId}`, { cache: "no-store", headers });
-    const parsedGymData: GetOccupantsAPI = await response.json();
+  const response = await fetch(`https://capi.puregym.com/api/v2/gymSessions/gym?gymId=${gymId}`, { cache: "no-store", headers });
+  const parsedGymData: GetOccupantsAPI = await response.json();
 
-    const occupants = parsedGymData.TotalPeopleInGym;
+  const occupants = parsedGymData.TotalPeopleInGym;
 
-    res.json({
-      status: "success",
-      occupants,
-    });
-  } catch (error) {
-    res.status(500).json({
-      status: "error",
-      message: "Error fetching occupants",
-    });
-  }
+  console.log("response:", parsedGymData);
+  res.json({
+    status: "success",
+    occupants,
+  });
 });
 
 app.post("/login", async (req, res) => {
