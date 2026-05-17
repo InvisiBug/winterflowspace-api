@@ -1,7 +1,7 @@
 ## Need a build stage to compile the typescript
 
 ## Build stage
-FROM  arm64v8/node AS build
+FROM  arm64v8/node:21 AS build
 
 COPY . .
 
