@@ -11,7 +11,9 @@ app.use(json());
 app.use(cors());
 
 app.post("/get-bookings", async (req, res) => {
-  console.log("🚀 ~ bookings:");
+  // console.log("🚀 ~ bookings:");
+  // console.log("🚀 ~ req.body.gymId:", req.body.gymId);
+
   // try {
   const response = await fetch(`https://businessgateway.puregym.com/api/bookings/v1/timetable/${req.body.gymId}/scheduled-class`, { cache: "no-store" });
   const jsonResponse: GetBookingsAPI = await response.json();
