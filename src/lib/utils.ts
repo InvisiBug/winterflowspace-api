@@ -1,5 +1,7 @@
 import { GetBookingsAPI, Booking } from "./types";
 
+const log = true;
+
 export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[][]> => {
   const numDays = 2;
   const studioBookings: Booking[][] = [];
@@ -11,7 +13,8 @@ export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[]
       if (activity.studio !== undefined) {
         if (activity.studio.toUpperCase() === "STUDIO") {
           // Check if activity is today
-          const activityDate = new Date(activity.startDateTime.dateTime).toDateString();
+          const activityDate = new Date(activity.startDateTime.dateTime.replace("T", " ")).toDateString();
+          console.log("🚀 ~ getStudioBookings ~ activityDate:", activityDate);
 
           const d = new Date();
           const now = new Date(d.setDate(d.getDate() + dayIndex)).toDateString();
