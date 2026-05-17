@@ -10,7 +10,7 @@ RUN yarn build
 
 
 ## Deploy stage
-FROM  arm64v8/node
+FROM  arm64v8/node:21
 
 WORKDIR /usr/src/app
 
