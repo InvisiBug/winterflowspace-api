@@ -24,10 +24,10 @@ export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[]
             const startTime = new Date(rawStartTime);
             const endTime = new Date(startTime.getTime() + activity.duration * 60000);
 
-            const startHours = String(startTime.getHours()).padStart(2, "0");
+            const startHours = String(startTime.getHours() + 1).padStart(2, "0");
             const startMinutes = String(startTime.getMinutes()).padStart(2, "0");
 
-            const endHours = String(endTime.getHours()).padStart(2, "0");
+            const endHours = String(endTime.getHours() + 1).padStart(2, "0");
             const endMinutes = String(endTime.getMinutes()).padStart(2, "0");
 
             const start = `${startHours}:${startMinutes}`;
@@ -37,6 +37,7 @@ export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[]
               free: false,
               end: end,
             });
+
             console.log("🚀 ~ getStudioBookings ~ activity:", activity.name, activityDate, start, end);
           }
         }
