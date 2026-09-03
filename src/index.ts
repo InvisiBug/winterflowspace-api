@@ -60,7 +60,7 @@ app.get("/get-gyms", async (_, res) => {
 });
 
 app.post("/get-occupants", async (req, res) => {
-  console.log("🚀 ~ /get-occupants ~ req.body:", req.body);
+  // console.log("🚀 ~ /get-occupants ~ req.body:", req.body);
   const { token, gymId } = req.body;
 
   const headers = {
@@ -74,7 +74,7 @@ app.post("/get-occupants", async (req, res) => {
 
   const occupants = parsedGymData.TotalPeopleInGym;
 
-  console.log("response:", parsedGymData);
+  // console.log("response:", parsedGymData);
   res.json({
     status: "success",
     occupants,

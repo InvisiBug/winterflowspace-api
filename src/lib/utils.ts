@@ -14,7 +14,6 @@ export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[]
         if (activity.studio.toUpperCase() === "STUDIO") {
           // Check if activity is today
           const activityDate = new Date(activity.startDateTime.dateTime.replace("T", " ")).toDateString();
-          console.log("🚀 ~ getStudioBookings ~ activityDate:", activityDate);
 
           const d = new Date();
           const now = new Date(d.setDate(d.getDate() + dayIndex)).toDateString();
@@ -31,11 +30,14 @@ export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[]
             const endHours = String(endTime.getHours()).padStart(2, "0");
             const endMinutes = String(endTime.getMinutes()).padStart(2, "0");
 
+            const start = `${startHours}:${startMinutes}`;
+            const end = `${endHours}:${endMinutes}`;
             dailyStudioBookings.push({
-              start: `${startHours}:${startMinutes}`,
+              start: start,
               free: false,
-              end: `${endHours}:${endMinutes}`,
+              end: end,
             });
+            console.log("🚀 ~ getStudioBookings ~ activity:", activity.name, activityDate, start, end);
           }
         }
       }
