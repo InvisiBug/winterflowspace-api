@@ -18,16 +18,19 @@ export const getStudioBookings = async (data: GetBookingsAPI): Promise<Booking[]
           const d = new Date();
           const now = new Date(d.setDate(d.getDate() + dayIndex)).toDateString();
 
+          const dstFix = 0;
+          // TODO: Add "running on server check" via env and only apply dst fix is so
+
           if (activityDate == now) {
             const rawStartTime = activity.startDateTime.dateTime.replace("T", " "); // They keep changing the date format so pulled it out here
 
             const startTime = new Date(rawStartTime);
             const endTime = new Date(startTime.getTime() + activity.duration * 60000);
 
-            const startHours = String(startTime.getHours() + 1).padStart(2, "0");
+            const startHours = String(startTime.getHours() + dstFix).padStart(2, "0");
             const startMinutes = String(startTime.getMinutes()).padStart(2, "0");
 
-            const endHours = String(endTime.getHours() + 1).padStart(2, "0");
+            const endHours = String(endTime.getHours() + dstFix).padStart(2, "0");
             const endMinutes = String(endTime.getMinutes()).padStart(2, "0");
 
             const start = `${startHours}:${startMinutes}`;
